@@ -14,9 +14,24 @@ class SendRequest():
         print('url:{}\r\nmethod:{}\r\nrequest_data:{}\r\nresponse:{}'.format(url, 'post', dict, re.json()))
         return re.json()
 
+    def send_query_post(self, url, dict=None, header=None):
+        re = requests.post(url, params=dict, headers=header)
+        print('url:{}\r\nmethod:{}\r\nrequest_data:{}\r\nresponse:{}'.format(url, 'post', dict, re.json()))
+        return re.json()
+
     def send_get_request(self, url, header=None):
         re = requests.get(url, headers=header)
         print('url:{}\r\nmethod:{}\r\nrequest_data:{}\r\nresponse:{}'.format(url, 'get', None, re.json()))
+        return re.json()
+
+    def delete_request(self, url, header=None):
+        re = requests.delete(url, headers=header)
+        print('url:{}\r\nmethod:{}\r\nrequest_data:{}\r\nresponse:{}'.format(url, 'delete', None, re.json()))
+        return re.json()
+
+    def patch_request(self, url, header=None):
+        re = requests.patch(url, headers=header)
+        print('url:{}\r\nmethod:{}\r\nrequest_data:{}\r\nresponse:{}'.format(url, 'patch', None, re.json()))
         return re.json()
 
 if __name__ == '__main__':

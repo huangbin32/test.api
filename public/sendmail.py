@@ -75,10 +75,10 @@ class SendMail:
     def send(self):  #使用smtp发送
         """发送邮件"""
         self.__take_messages()
-        self.msg['from'] = 'postmaster@{}'.format(sendaddr_name)
+        self.msg['from'] = sendaddr_name
         try:
-            smtp = smtplib.SMTP('smtp.mailgun.org', 587)
-            smtp.login('postmaster@{}'.format(sendaddr_name), sendaddr_pswd)
+            smtp = smtplib.SMTP('smtp.qq.com', 587)
+            smtp.login(sendaddr_name, sendaddr_pswd)
             smtp.sendmail(self.msg['from'], self.sendTo, self.msg.as_string())
             smtp.close()
             logger.info("发送邮件成功")

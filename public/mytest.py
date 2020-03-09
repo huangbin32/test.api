@@ -27,22 +27,16 @@ class MyTokenTest(unittest.TestCase):
     """
 
     @classmethod
-    def login_func(cls, account='281878321@qq.com', pw='q5310543'):
+    def login_func(cls, account='xxx', pw='xxx'):
         """封装登陆函数"""
         send_data = {
+            "service_id":"5e183e6f663f0000210032dc",
             "account":account,
-            "password":pw,
-            "platform_code":"PLATFORM",
-            "app_id":"a1287a3837f640e0"
-        }
-        url = ConfigInit.login_url + '/login'
-        logger.info(url)
+            "password":pw}
+        url = ConfigInit.login_url + '/login/login'
         headers = {'Content-Type': 'application/json'}
-        logger.info(send_data)
-        logger.info(headers)
         r = SendRequest().send_json_post(url=url, dict=send_data, header=headers)
-        logger.info(r)
-        token = r['data']['accessToken']
+        token = r['data']['access_token']
         return token
 
     @classmethod
@@ -58,4 +52,21 @@ class MyTokenTest(unittest.TestCase):
 
 
     def tearDown(self):
+        time.sleep(1)
         logger.info('###############################  End  ###############################')
+
+    def replace_dict(self, d, parameter1, parameter2):
+        #替换字典中指定value
+        new = {}
+        for k, v in d.items():
+            if isinstance(v, dict):
+                v = self.replace_dict(v, parameter1, parameter2)
+            if v == parameter1:
+                new[k] = parameter2
+            else:
+                new[k] = v
+        return new
+
+    @classmethod
+    def tearDownClass(cls):
+        pass

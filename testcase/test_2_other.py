@@ -1,28 +1,23 @@
 #coding=utf-8
-import ast
 import json
-from pprint import pprint
 from public import mytest
-from ddt import ddt,data,unpack
+from ddt import ddt, data, unpack
 from loguru import logger
 from public.send_request import SendRequest
 from public.data_info import get_test_case_data, data_info, write_res
+# import json
 
 @ddt
-class Login(mytest.MyTest):
-    """登陆模块"""
+class Other(mytest.MyTokenTest):
+    """其他需要验证token的接口"""
 
-    @data(*get_test_case_data(data_info, 'login'))
-    def test_login(self, data):
-        "登陆接口"
+    @data(*get_test_case_data(data_info, 'other'))
+    def test_api(self, data):
         method = data['method']
         url = self.url + data['url']
         send_data = data['send_data']
         assert_info = data['assert_info']
         rownum = data['rownum']
-        # logger.info(url)
-        # logger.info(send_data)
-        # logger.info(self.headers)
         if method == 'post':
             r = SendRequest().send_json_post(url=url, dict=send_data, header=self.headers)
         if method == 'get':
@@ -31,10 +26,3 @@ class Login(mytest.MyTest):
         write_res(rownum, json.dumps(r, indent=2, ensure_ascii=False))
         self.assertEqual(r['code'], assert_info['code'])
         self.assertEqual(r['msg'], assert_info['msg'])
-
-
-
-
-
-
-

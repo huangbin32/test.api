@@ -8,7 +8,8 @@ from loguru import logger
 from config import globalparam
 from public import sendmail
 # import BeautifulReport
-from testcase import test_login
+from testcase import test_3_project
+from public.mongo_utils import update_project_info, update_product
 
 
 path = os.path.join(os.path.abspath('.'),'report', 'log','test_{}.log'.format(time.strftime('%Y-%m-%d')))
@@ -28,10 +29,12 @@ def run(method, test=None):
                 description='输出如下报告'
             )
             runner.run(suite)
+        # update_project_info()
+        # update_product()
         time.sleep(3)
         # 发送邮件
-        # mail = sendmail.SendMail()
-        # mail.send()
+        mail = sendmail.SendMail()
+        mail.send()
     if method == 'one':
         suit = unittest.TestSuite()
         suit.addTest(test)  # 把这个类中需要执行的测试用例加进去，有多条再加即可
@@ -39,5 +42,5 @@ def run(method, test=None):
         runner.run(suit)
 
 if __name__ == '__main__':
-    # run('one', test_login.TestLogin("test_login"))
+    # run('one', test_3_project.Project("test_6_enable_project"))
     run('all')
