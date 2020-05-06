@@ -27,27 +27,30 @@ class MyTokenTest(unittest.TestCase):
     """
 
     @classmethod
-    def login_func(cls, account='xxx', pw='xxx'):
-        """封装登陆函数"""
+    def login_func(cls, account='18175516432', pw='hb123456'):
+        """封装登录函数"""
         send_data = {
-            "service_id":"5e183e6f663f0000210032dc",
             "account":account,
-            "password":pw}
-        url = ConfigInit.login_url + '/login/login'
+            "password":pw,
+            "login_type":1 }
+        url = ConfigInit.login_url + '/id_v2_5/user/login'
         headers = {'Content-Type': 'application/json'}
         r = SendRequest().send_json_post(url=url, dict=send_data, header=headers)
-        token = r['data']['access_token']
-        return token
+        token = r['data']['token']
+        user_id = r['data']['basic']['id']
+        return token,user_id
 
     @classmethod
     def setUpClass(cls):
-        cls.token = cls.login_func()
+        cls.token, cls.user_id = cls.login_func()
 
     def setUp(self):
         self.url = ConfigInit.url
         self.headers = {'Content-Type': 'application/json',
-                        'Authorization':'Bearer ' + self.token
+                        'JK-TOKEN':self.token,
+                        'JK-USER-ID': str(self.user_id)
                         }
+        logger.info(self.headers)
         logger.info('############################### START ###############################')
 
 

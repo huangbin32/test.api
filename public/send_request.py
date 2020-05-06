@@ -1,7 +1,7 @@
 #coding=utf-8
 import requests
 import json
-
+from loguru import logger
 
 class SendRequest():
     def send_json_post(self, url, dict=None, header=None):
@@ -21,6 +21,7 @@ class SendRequest():
 
     def send_get_request(self, url, header=None):
         re = requests.get(url, headers=header)
+        logger.info(re.text)
         print('url:{}\r\nmethod:{}\r\nrequest_data:{}\r\nresponse:{}'.format(url, 'get', None, re.json()))
         return re.json()
 

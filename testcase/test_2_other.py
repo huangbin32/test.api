@@ -13,8 +13,10 @@ class Other(mytest.MyTokenTest):
 
     @data(*get_test_case_data(data_info, 'other'))
     def test_api(self, data):
+        logger.info(data)
         method = data['method']
         url = self.url + data['url']
+        logger.info(url)
         send_data = data['send_data']
         assert_info = data['assert_info']
         rownum = data['rownum']
@@ -22,6 +24,7 @@ class Other(mytest.MyTokenTest):
             r = SendRequest().send_json_post(url=url, dict=send_data, header=self.headers)
         if method == 'get':
             r = SendRequest().send_get_request(url=url,header=self.headers)
+        logger.info(r)
         # print('url:{}\r\nmethod:{}\r\nrequest_data:{}\r\nresponse:{}'.format(url,method, send_data, r))
         write_res(rownum, json.dumps(r, indent=2, ensure_ascii=False))
         self.assertEqual(r['code'], assert_info['code'])

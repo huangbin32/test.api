@@ -83,7 +83,7 @@ def get_specific_num(path=PATH, index=0, num=1):
 
 data_info = get_excel_dict(PATH)
 # print(data_info[5])
-# a = get_test_case_data(data_info, 'enable_project')
+# a = get_test_case_data(data_info, 'other')
 # pprint(a)
 #
 

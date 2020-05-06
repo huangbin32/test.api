@@ -10,11 +10,11 @@ from public.data_info import get_test_case_data, data_info, write_res
 
 @ddt
 class Login(mytest.MyTest):
-    """登陆模块"""
+    """登录模块"""
 
     @data(*get_test_case_data(data_info, 'login'))
     def test_login(self, data):
-        "登陆接口"
+        "登录接口"
         method = data['method']
         url = self.url + data['url']
         send_data = data['send_data']

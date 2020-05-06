@@ -1,7 +1,7 @@
 #coding=utf-8
 
 import unittest
-import HTMLTestRunner
+import HTMLTestRunner_api
 import time
 import os
 from loguru import logger
@@ -17,12 +17,12 @@ logger.add(path)  # 日志初始化
 def run(method, test=None):
     if method == 'all':
         test_dir = './testcase'
-        suite = unittest.defaultTestLoader.discover(start_dir=test_dir, pattern='test_*.py')
+        suite = unittest.defaultTestLoader.discover(start_dir=test_dir, pattern='test_2*.py')
 
         now = time.strftime('%Y-%m-%d_%H_%M_%S')
         reportname = os.path.join(globalparam.report_path, 'TestResult' + now + '.html')
         with open(reportname, 'wb') as f:
-            runner = HTMLTestRunner.HTMLTestRunner(
+            runner = HTMLTestRunner_api.HTMLTestRunner(
                 stream=f,
                 verbosity=2,
                 title='测试报告',
