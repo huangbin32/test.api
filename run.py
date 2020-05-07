@@ -12,12 +12,12 @@ from testcase import test_3_project
 from public.mongo_utils import update_project_info, update_product
 
 
-path = os.path.join(os.path.abspath('.'),'report', 'log','test_{}.log'.format(time.strftime('%Y-%m-%d')))
+path = os.path.join(os.path.abspath('.'),'report', 'logs','test_{}.log'.format(time.strftime('%Y-%m-%d')))
 logger.add(path)  # 日志初始化
 def run(method, test=None):
     if method == 'all':
         test_dir = './testcase'
-        suite = unittest.defaultTestLoader.discover(start_dir=test_dir, pattern='test_2*.py')
+        suite = unittest.defaultTestLoader.discover(start_dir=test_dir, pattern='test_3*.py')
 
         now = time.strftime('%Y-%m-%d_%H_%M_%S')
         reportname = os.path.join(globalparam.report_path, 'TestResult' + now + '.html')

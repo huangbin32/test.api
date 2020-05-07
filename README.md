@@ -12,7 +12,7 @@ data/  数据驱动文件存放路径
 
 public/  各种方法封装
         
-    datainfo  读取数据文件方法
+    data_info  读取数据文件方法
         
     mongo_utils   连接mongodb
         
@@ -30,7 +30,7 @@ report  测试生成数据目录
 
     html_report  测试报告存放路径
     
-    log  log日志存放路径
+    logs  log日志存放路径
     
 testcase  用例写在这个目录
 
